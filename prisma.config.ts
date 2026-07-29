@@ -13,6 +13,8 @@ export default defineConfig({
     // The CLI (migrate/generate/studio) connects directly, bypassing the
     // pooler — the app itself connects separately via DATABASE_URL in
     // src/lib/prisma.ts, using the pooled connection.
-    url: process.env["DIRECT_DATABASE_URL"] ?? process.env["DATABASE_URL"],
+    // DATABASE_URL_UNPOOLED is provided automatically by Vercel's Neon
+    // integration (the "non-pooling" connection string).
+    url: process.env["DATABASE_URL_UNPOOLED"] ?? process.env["DATABASE_URL"],
   },
 });
