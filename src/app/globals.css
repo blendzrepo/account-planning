@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6f6fb;
+  --foreground: #1b1830;
+
+  --color-navy: #262163;
+  --color-navy-deep: #1e1a52;
+  --color-accent: #d98a33;
+  --color-teal: #4a8b96;
+  --color-card: #f1f0fa;
+  --color-card-border: #e1def4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-navy: var(--color-navy);
+  --color-navy-deep: var(--color-navy-deep);
+  --color-accent: var(--color-accent);
+  --color-teal: var(--color-teal);
+  --color-card: var(--color-card);
+  --color-card-border: var(--color-card-border);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: white;
+}

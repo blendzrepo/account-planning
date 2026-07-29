@@ -1,0 +1,182 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// Um cliente/conta = um Account Business Plan (ABP)
+model Client {
+  id        String   @id @default(cuid())
+  name      String
+  tag       String? // ex: AZUL, VIVO — selo exibido no rodapé do plano
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Seção 1 — Análise da situação atual
+  receitaContratada     Float? // R$ acumulado
+  renovacaoAberta       Float? // R$ em negociação
+  npsLabel              String? // texto livre (ex: "72", "Promotor")
+  tempoRelacao          String? // ex: "~6 anos"
+  historicoRelacionamento String?
+  produtosContratados     String?
+  posicaoCompetitiva      String?
+  riscosPontosAtencaoResumo String?
+
+  // Seção 6 — Proposta de valor
+  diferenciaisConcorrencia String?
+
+  // Seção 9 — Métricas e governança (campos narrativos)
+  cadenciaReunioes    String?
+  participantesChave  String?
+  revisaoPlano        String?
+
+  stakeholders     Stakeholder[]
+  objetivos        Objetivo[]
+  oportunidades    Oportunidade[]
+  riscos           Risco[]
+  swotItems        SwotItem[]
+  propostaItems    PropostaValorItem[]
+  acoes            AcaoPlano[]
+  kpis             MetricaKpi[]
+}
+
+enum PapelStakeholder {
+  DECISOR
+  INFLUENCIADOR
+  COMPRAS
+  USUARIO
+  PATROCINADOR
+}
+
+enum NivelPoder {
+  ALTO
+  MEDIO
+  BAIXO
+}
+
+model Stakeholder {
+  id                String           @id @default(cuid())
+  clientId          String
+  client            Client           @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  nome              String
+  cargo             String?
+  papel             PapelStakeholder @default(USUARIO)
+  poder             NivelPoder       @default(MEDIO)
+  agenda            String?
+  estrategia        String?
+  linkedinHighlight String?
+  order             Int              @default(0)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+}
+
+model Objetivo {
+  id        String   @id @default(cuid())
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  objetivo  String
+  metrica   String?
+  baseline  String?
+  meta      String?
+  prazo     String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Oportunidade {
+  id             String   @id @default(cuid())
+  clientId       String
+  client         Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  nome           String
+  solucao        String?
+  valorPotencial Float?
+  estagio        String?
+  probabilidade  Int?
+  proximoPasso   String?
+  order          Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Risco {
+  id            String   @id @default(cuid())
+  clientId      String
+  client        Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  risco         String
+  impacto       String?
+  probabilidade String?
+  sinaisAlerta  String?
+  mitigacao     String?
+  responsavel   String?
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum SwotTipo {
+  FORCA
+  FRAQUEZA
+  OPORTUNIDADE
+  AMEACA
+}
+
+model SwotItem {
+  id        String   @id @default(cuid())
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  tipo      SwotTipo
+  texto     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum PropostaTipo {
+  DOR
+  SOLUCAO
+}
+
+model PropostaValorItem {
+  id        String       @id @default(cuid())
+  clientId  String
+  client    Client       @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  tipo      PropostaTipo
+  texto     String
+  order     Int          @default(0)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model AcaoPlano {
+  id                 String   @id @default(cuid())
+  clientId           String
+  client             Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  iniciativa         String
+  objetivoRelacionado String?
+  responsavel        String?
+  prazo              String?
+  recursos           String?
+  status             String?
+  order              Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model MetricaKpi {
+  id          String   @id @default(cuid())
+  clientId    String
+  client      Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  kpi         String
+  meta        String?
+  frequencia  String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
