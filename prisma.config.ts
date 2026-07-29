@@ -16,5 +16,6 @@ export default defineConfig({
     // DATABASE_URL_UNPOOLED is provided automatically by Vercel's Neon
     // integration (the "non-pooling" connection string).
     url: process.env["DATABASE_URL_UNPOOLED"] ?? process.env["DATABASE_URL"],
+    shadowDatabaseUrl: process.env["SHADOW_DATABASE_URL"],
   },
 });

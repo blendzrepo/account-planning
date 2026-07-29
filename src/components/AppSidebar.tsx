@@ -1,12 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import ClientSwitcher from "./ClientSwitcher";
 import SectionNav from "./SectionNav";
+import { logout } from "@/lib/actions/auth";
 
 type ClientOption = { id: string; name: string; tag: string | null };
 
-export default function AppSidebar({ clients }: { clients: ClientOption[] }) {
+export default function AppSidebar({
+  clients,
+  username,
+}: {
+  clients: ClientOption[];
+  username: string;
+}) {
   const [open, setOpen] = useState(false);
 
   // Close the mobile drawer whenever the viewport grows into the desktop breakpoint.
@@ -60,6 +68,21 @@ export default function AppSidebar({ clients }: { clients: ClientOption[] }) {
         </div>
         <ClientSwitcher clients={clients} onNavigate={close} />
         <SectionNav onNavigate={close} />
+
+        <div className="mt-4 pt-4 border-t border-white/10 text-xs">
+          <div className="text-white/40 mb-1.5">Logado como</div>
+          <div className="font-semibold mb-3">{username}</div>
+          <div className="flex gap-3">
+            <Link href="/clients/account" className="text-accent hover:underline" onClick={close}>
+              trocar senha
+            </Link>
+            <form action={logout}>
+              <button type="submit" className="text-white/50 hover:underline">
+                sair
+              </button>
+            </form>
+          </div>
+        </div>
       </aside>
     </>
   );
