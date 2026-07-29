@@ -27,12 +27,17 @@ export default function EditableField({
   const [pending, startTransition] = useTransition();
 
   if (editing) {
+    // Deliberately not reusing `className` here — it's tuned for the display
+    // state (e.g. large white text on a navy card) and would otherwise fight
+    // an editable input's own sizing/contrast needs and can force overflow
+    // in narrow containers.
+    const inputClassName = "min-w-0 flex-1 rounded border border-card-border bg-white px-2 py-1 text-sm text-gray-900";
     return (
-      <div className="flex gap-2 items-start">
+      <div className="flex gap-2 items-start min-w-0">
         {multiline ? (
           <textarea
             autoFocus
-            className={`flex-1 rounded border border-card-border px-2 py-1 text-sm ${className}`}
+            className={inputClassName}
             rows={3}
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
@@ -40,7 +45,7 @@ export default function EditableField({
         ) : (
           <input
             autoFocus
-            className={`flex-1 rounded border border-card-border px-2 py-1 text-sm ${className}`}
+            className={inputClassName}
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
           />

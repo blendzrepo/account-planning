@@ -23,7 +23,7 @@ export default async function ClientSettingsPage({ params }: { params: Promise<{
   }
 
   return (
-    <div className="max-w-lg mx-auto py-16 px-6">
+    <div className="max-w-lg mx-auto py-10 px-4 md:py-16 md:px-6">
       <Link href={`/clients/${id}`} className="text-sm text-navy hover:underline">
         ← voltar para o plano
       </Link>

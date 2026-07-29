@@ -2,7 +2,7 @@ import { createClient } from "@/lib/actions/clients";
 
 export default function NewClientPage() {
   return (
-    <div className="max-w-lg mx-auto py-16 px-6">
+    <div className="max-w-lg mx-auto py-10 px-4 md:py-16 md:px-6">
       <h1 className="text-2xl font-extrabold text-navy mb-1">Novo cliente</h1>
       <p className="text-gray-500 mb-8">Crie um novo Account Business Plan.</p>
       <ClientForm />

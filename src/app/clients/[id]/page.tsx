@@ -18,10 +18,10 @@ export default async function ClientPage({ params }: { params: Promise<{ id: str
   if (!client) notFound();
 
   return (
-    <div className="max-w-5xl mx-auto px-8 py-10">
-      <div className="flex items-baseline justify-between mb-10 pb-6 border-b border-card-border">
+    <div className="max-w-5xl mx-auto px-4 py-6 md:px-8 md:py-10">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 mb-8 pb-6 border-b border-card-border md:mb-10">
         <div>
-          <h1 className="text-2xl font-extrabold text-navy">{client.name}</h1>
+          <h1 className="text-xl font-extrabold text-navy md:text-2xl">{client.name}</h1>
           <p className="text-sm text-gray-400 mt-0.5">
             Account Business Plan{client.tag ? ` · ${client.tag}` : ""}
           </p>

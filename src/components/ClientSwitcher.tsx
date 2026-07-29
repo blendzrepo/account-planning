@@ -5,7 +5,13 @@ import { useParams, useRouter } from "next/navigation";
 
 type ClientOption = { id: string; name: string; tag: string | null };
 
-export default function ClientSwitcher({ clients }: { clients: ClientOption[] }) {
+export default function ClientSwitcher({
+  clients,
+  onNavigate,
+}: {
+  clients: ClientOption[];
+  onNavigate?: () => void;
+}) {
   const params = useParams<{ id?: string }>();
   const router = useRouter();
   const currentId = params?.id;
@@ -17,7 +23,10 @@ export default function ClientSwitcher({ clients }: { clients: ClientOption[] })
       </label>
       <select
         value={currentId ?? ""}
-        onChange={(e) => router.push(`/clients/${e.target.value}`)}
+        onChange={(e) => {
+          router.push(`/clients/${e.target.value}`);
+          onNavigate?.();
+        }}
         className="w-full rounded-md bg-white/10 text-white px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-accent/60"
       >
         {clients.length === 0 && <option value="">Nenhum cliente</option>}
@@ -29,11 +38,15 @@ export default function ClientSwitcher({ clients }: { clients: ClientOption[] })
         ))}
       </select>
       <div className="flex gap-3 mt-2 text-xs">
-        <Link href="/clients/new" className="text-accent hover:underline">
+        <Link href="/clients/new" className="text-accent hover:underline" onClick={onNavigate}>
           + novo cliente
         </Link>
         {currentId && (
-          <Link href={`/clients/${currentId}/settings`} className="text-white/50 hover:underline">
+          <Link
+            href={`/clients/${currentId}/settings`}
+            className="text-white/50 hover:underline"
+            onClick={onNavigate}
+          >
             gerenciar
           </Link>
         )}
