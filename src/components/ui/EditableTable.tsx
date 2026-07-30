@@ -103,8 +103,8 @@ export default function EditableTable<T extends Row>({
                 </td>
               </tr>
             )}
-            {rows.map((row, i) => (
-              <tr key={row.id} className={i % 2 === 1 ? "bg-card/50" : "bg-white"}>
+            {rows.map((row) => (
+              <tr key={row.id} className="bg-white">
                 {editingId === row.id ? (
                   <RowInputs columns={columns} draft={draft} setDraft={setDraft} />
                 ) : (

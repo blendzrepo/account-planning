@@ -98,7 +98,7 @@ export default function SituacaoSection({ client }: { client: ClientDetail }) {
 
 function InfoCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-lg bg-card border border-card-border p-5">
+    <div className="rounded-lg bg-white border border-card-border p-5">
       <h3 className="text-sm font-bold text-navy uppercase tracking-wide mb-2">{title}</h3>
       <div className="text-sm text-gray-700 leading-relaxed">{children}</div>
     </div>

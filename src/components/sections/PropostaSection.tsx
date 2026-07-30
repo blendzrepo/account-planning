@@ -48,7 +48,7 @@ export default function PropostaSection({ client }: { client: ClientDetail }) {
       <div className="grid md:grid-cols-2 gap-4 mb-4">
         <div className="rounded-lg border border-card-border overflow-hidden">
           <div className="bg-navy text-white px-4 py-3 font-bold text-sm">Dores e objetivos do cliente</div>
-          <div className="bg-card p-5">
+          <div className="bg-white p-5">
             <EditableList
               items={client.propostaItems.filter((i) => i.tipo === PropostaTipo.DOR)}
               onAdd={handleAddDor}
@@ -60,7 +60,7 @@ export default function PropostaSection({ client }: { client: ClientDetail }) {
         </div>
         <div className="rounded-lg border border-card-border overflow-hidden">
           <div className="bg-teal text-white px-4 py-3 font-bold text-sm">Nossa solução e valor entregue</div>
-          <div className="bg-card p-5">
+          <div className="bg-white p-5">
             <EditableList
               items={client.propostaItems.filter((i) => i.tipo === PropostaTipo.SOLUCAO)}
               onAdd={handleAddSolucao}
