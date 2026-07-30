@@ -2,15 +2,15 @@ export type ButtonVariant = "primary" | "secondary" | "danger" | "ghost" | "dang
 export type ButtonSize = "sm" | "md";
 
 const BASE =
-  "inline-flex items-center justify-center gap-1.5 rounded-md font-semibold transition-colors disabled:opacity-60 disabled:cursor-not-allowed";
+  "inline-flex items-center justify-center gap-1.5 rounded-full font-semibold transition-colors disabled:opacity-60 disabled:cursor-not-allowed";
 
 const SIZES: Record<ButtonSize, string> = {
-  sm: "px-2.5 py-1 text-xs",
-  md: "px-4 py-2 text-sm",
+  sm: "px-3 py-1 text-xs",
+  md: "px-5 py-2 text-sm",
 };
 
 const VARIANTS: Record<ButtonVariant, string> = {
-  primary: "bg-navy text-white hover:opacity-90",
+  primary: "bg-mint text-navy hover:brightness-95",
   secondary: "bg-white text-navy border border-card-border hover:bg-card",
   danger: "bg-white text-red-600 border border-red-300 hover:bg-red-50",
   ghost: "bg-card text-navy border border-card-border hover:border-navy/30",

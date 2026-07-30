@@ -162,7 +162,7 @@ export default function EditableTable<T extends Row>({
       {!adding && (
         <button
           onClick={startAdd}
-          className={buttonClasses("dashed", "sm", "w-full rounded-none border-x-0 border-b-0")}
+          className={buttonClasses("dashed", "sm", "w-full !rounded-none border-x-0 border-b-0")}
         >
           + adicionar linha
         </button>

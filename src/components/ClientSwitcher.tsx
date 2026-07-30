@@ -41,7 +41,7 @@ export default function ClientSwitcher({
         <Link
           href="/clients/new"
           onClick={onNavigate}
-          className="rounded-md border border-white/15 px-2.5 py-1 text-xs font-semibold text-accent hover:bg-white/10"
+          className="rounded-full border border-white/15 px-2.5 py-1 text-xs font-semibold text-accent hover:bg-white/10"
         >
           + novo cliente
         </Link>
@@ -49,7 +49,7 @@ export default function ClientSwitcher({
           <Link
             href={`/clients/${currentId}/settings`}
             onClick={onNavigate}
-            className="rounded-md border border-white/15 px-2.5 py-1 text-xs font-semibold text-white/70 hover:bg-white/10"
+            className="rounded-full border border-white/15 px-2.5 py-1 text-xs font-semibold text-white/70 hover:bg-white/10"
           >
             gerenciar
           </Link>

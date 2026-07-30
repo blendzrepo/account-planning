@@ -145,7 +145,7 @@ export default function StakeholderCards({
       {!adding && (
         <button
           onClick={startAdd}
-          className={buttonClasses("dashed", "md", "min-h-[8rem] flex-col text-sm")}
+          className={buttonClasses("dashed", "md", "min-h-[8rem] flex-col text-sm !rounded-lg")}
         >
           <span className="text-2xl leading-none">+</span>
           <span>adicionar stakeholder</span>
