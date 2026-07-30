@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/prisma";
 
-export async function getClientDetail(id: string) {
+export async function getClientDetail(id: string, orgId: string) {
   return prisma.client.findUnique({
-    where: { id },
+    where: { id, orgId },
     include: {
       stakeholders: { orderBy: { order: "asc" } },
       objetivos: { orderBy: { order: "asc" } },

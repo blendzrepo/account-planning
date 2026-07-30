@@ -7,25 +7,37 @@ import { redirect } from "next/navigation";
 
 export type LoginState = { error?: string } | undefined;
 
+function normalizeSlug(value: string) {
+  return value.trim().toLowerCase().replace(/\s+/g, "");
+}
+
 export async function login(_prevState: LoginState, formData: FormData): Promise<LoginState> {
+  const orgSlug = normalizeSlug(String(formData.get("organizacao") ?? ""));
   const username = String(formData.get("username") ?? "").trim();
   const password = String(formData.get("password") ?? "");
 
-  if (!username || !password) {
-    return { error: "Preencha usuário e senha." };
+  if (!orgSlug || !username || !password) {
+    return { error: "Preencha organização, usuário e senha." };
   }
 
-  const user = await prisma.user.findUnique({ where: { username } });
+  const org = await prisma.organization.findUnique({ where: { slug: orgSlug } });
+  if (!org) {
+    return { error: "Organização, usuário ou senha inválidos." };
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { orgId_username: { orgId: org.id, username } },
+  });
   if (!user) {
-    return { error: "Usuário ou senha inválidos." };
+    return { error: "Organização, usuário ou senha inválidos." };
   }
 
   const valid = await verifyPassword(password, user.passwordHash);
   if (!valid) {
-    return { error: "Usuário ou senha inválidos." };
+    return { error: "Organização, usuário ou senha inválidos." };
   }
 
-  await createSession(user.id, user.username);
+  await createSession(user.id, user.username, user.orgId);
   redirect("/");
 }
 

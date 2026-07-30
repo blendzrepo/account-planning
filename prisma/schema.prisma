@@ -10,17 +10,48 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  OWNER
+  MEMBER
+}
+
+model Organization {
+  id         String   @id @default(cuid())
+  name       String
+  slug       String   @unique
+  isPlatform Boolean  @default(false)
+
+  // Personalização visual (hex). Nulo = usa o padrão do app.
+  corDestaque String?
+  corSidebar  String?
+  corTexto    String?
+  corFundo    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users   User[]
+  clients Client[]
+}
+
 model User {
   id           String   @id @default(cuid())
-  username     String   @unique
+  orgId        String
+  org          Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  username     String
   passwordHash String
+  role         Role     @default(MEMBER)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@unique([orgId, username])
 }
 
 // Um cliente/conta = um Account Business Plan (ABP)
 model Client {
   id        String   @id @default(cuid())
+  orgId     String
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
   name      String
   tag       String? // ex: AZUL, VIVO — selo exibido no rodapé do plano
   createdAt DateTime @default(now())

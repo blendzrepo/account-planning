@@ -8,10 +8,18 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  await prisma.client.deleteMany();
+  const org = await prisma.organization.findUnique({ where: { slug: "primecontrol" } });
+  if (!org) {
+    throw new Error(
+      'Organização "primecontrol" não encontrada — rode as migrations antes de seedar.'
+    );
+  }
+
+  await prisma.client.deleteMany({ where: { orgId: org.id } });
 
   const azul = await prisma.client.create({
     data: {
+      orgId: org.id,
       name: "Azul Linhas Aéreas",
       tag: "AZUL",
       receitaContratada: 10_300_000,
@@ -131,6 +139,7 @@ async function main() {
 
   const vivo = await prisma.client.create({
     data: {
+      orgId: org.id,
       name: "Vivo (Telefônica Brasil)",
       tag: "VIVO",
       renovacaoAberta: 7_064_057,

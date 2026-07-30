@@ -10,11 +10,21 @@ export default function LoginForm() {
   return (
     <form action={formAction} className="space-y-4">
       <div>
+        <label className="block text-sm font-medium text-navy mb-1">Organização</label>
+        <input
+          name="organizacao"
+          required
+          autoFocus
+          autoCapitalize="none"
+          placeholder="ex: primecontrol"
+          className="w-full rounded-md border border-card-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-navy/30"
+        />
+      </div>
+      <div>
         <label className="block text-sm font-medium text-navy mb-1">Usuário</label>
         <input
           name="username"
           required
-          autoFocus
           autoComplete="username"
           className="w-full rounded-md border border-card-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-navy/30"
         />

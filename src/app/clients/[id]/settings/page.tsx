@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { verifySession } from "@/lib/dal";
 import { notFound } from "next/navigation";
 import { renameClient, deleteClient } from "@/lib/actions/clients";
 import ConfirmForm from "@/components/ui/ConfirmForm";
@@ -7,7 +8,8 @@ import Link from "next/link";
 
 export default async function ClientSettingsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const client = await prisma.client.findUnique({ where: { id } });
+  const session = await verifySession();
+  const client = await prisma.client.findUnique({ where: { id, orgId: session.orgId } });
   if (!client) notFound();
 
   async function submitRename(formData: FormData) {

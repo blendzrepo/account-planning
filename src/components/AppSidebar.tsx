@@ -11,9 +11,15 @@ type ClientOption = { id: string; name: string; tag: string | null };
 export default function AppSidebar({
   clients,
   username,
+  orgName,
+  role,
+  isPlatform,
 }: {
   clients: ClientOption[];
   username: string;
+  orgName: string;
+  role: "OWNER" | "MEMBER";
+  isPlatform: boolean;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -39,7 +45,7 @@ export default function AppSidebar({
             <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-        <span className="font-extrabold text-sm">Account Business Plan</span>
+        <span className="font-extrabold text-sm uppercase tracking-wide">{orgName}</span>
       </header>
 
       {open && (
@@ -53,8 +59,8 @@ export default function AppSidebar({
       >
         <div className="mb-2 flex items-start justify-between">
           <div>
-            <div className="text-lg font-extrabold leading-tight">Account Business Plan</div>
-            <div className="text-xs text-white/40">Planejamento de contas</div>
+            <div className="text-lg font-extrabold leading-tight uppercase tracking-wide">{orgName}</div>
+            <div className="text-xs text-white/40">Account Business Plan</div>
           </div>
           <button
             onClick={close}
@@ -68,6 +74,43 @@ export default function AppSidebar({
         </div>
         <ClientSwitcher clients={clients} onNavigate={close} />
         <SectionNav onNavigate={close} />
+
+        {(role === "OWNER" || isPlatform) && (
+          <div className="mt-4 pt-4 border-t border-white/10">
+            <div className="text-[11px] font-semibold uppercase tracking-wide text-white/50 mb-1.5">
+              Organização
+            </div>
+            <div className="flex flex-col gap-1">
+              {role === "OWNER" && (
+                <Link
+                  href="/clients/team"
+                  onClick={close}
+                  className="rounded-md px-2 py-1.5 text-sm text-white/70 hover:bg-white/10 hover:text-white"
+                >
+                  Minha equipe
+                </Link>
+              )}
+              {role === "OWNER" && (
+                <Link
+                  href="/clients/appearance"
+                  onClick={close}
+                  className="rounded-md px-2 py-1.5 text-sm text-white/70 hover:bg-white/10 hover:text-white"
+                >
+                  Aparência
+                </Link>
+              )}
+              {isPlatform && (
+                <Link
+                  href="/clients/organizations"
+                  onClick={close}
+                  className="rounded-md px-2 py-1.5 text-sm text-white/70 hover:bg-white/10 hover:text-white"
+                >
+                  Organizações
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="mt-4 pt-4 border-t border-white/10 text-xs">
           <div className="text-white/40 mb-1.5">Logado como</div>

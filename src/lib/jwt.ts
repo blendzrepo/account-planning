@@ -13,6 +13,7 @@ function getEncodedKey() {
 export type SessionPayload = {
   userId: string;
   username: string;
+  orgId: string;
 };
 
 export async function encrypt(payload: SessionPayload): Promise<string> {
@@ -27,8 +28,14 @@ export async function decrypt(session?: string): Promise<SessionPayload | null> 
   if (!session) return null;
   try {
     const { payload } = await jwtVerify(session, getEncodedKey(), { algorithms: ["HS256"] });
-    if (typeof payload.userId !== "string" || typeof payload.username !== "string") return null;
-    return { userId: payload.userId, username: payload.username };
+    if (
+      typeof payload.userId !== "string" ||
+      typeof payload.username !== "string" ||
+      typeof payload.orgId !== "string"
+    ) {
+      return null;
+    }
+    return { userId: payload.userId, username: payload.username, orgId: payload.orgId };
   } catch {
     return null;
   }

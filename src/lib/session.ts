@@ -5,9 +5,9 @@ import { encrypt, decrypt, type SessionPayload } from "@/lib/jwt";
 const COOKIE_NAME = "session";
 const SESSION_DURATION_MS = 7 * 24 * 60 * 60 * 1000;
 
-export async function createSession(userId: string, username: string) {
+export async function createSession(userId: string, username: string, orgId: string) {
   const expiresAt = new Date(Date.now() + SESSION_DURATION_MS);
-  const session = await encrypt({ userId, username });
+  const session = await encrypt({ userId, username, orgId });
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, session, {
     httpOnly: true,

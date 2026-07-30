@@ -1,4 +1,5 @@
 import { getClientDetail } from "@/lib/queries";
+import { verifySession } from "@/lib/dal";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { buttonClasses } from "@/components/ui/button-styles";
@@ -15,7 +16,8 @@ import MetricasSection from "@/components/sections/MetricasSection";
 
 export default async function ClientPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const client = await getClientDetail(id);
+  const session = await verifySession();
+  const client = await getClientDetail(id, session.orgId);
   if (!client) notFound();
 
   return (
