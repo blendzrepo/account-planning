@@ -2,13 +2,17 @@ import LoginForm from "./LoginForm";
 
 export default function LoginPage() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a14] px-4">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-teal/40 blur-[110px]" />
-        <div className="absolute top-0 right-0 h-[28rem] w-[28rem] rounded-full bg-indigo-600/30 blur-[130px]" />
-        <div className="absolute bottom-[-10rem] left-1/4 h-[26rem] w-[26rem] rounded-full bg-orange-500/20 blur-[120px]" />
-        <div className="absolute bottom-[-6rem] right-10 h-72 w-72 rounded-full bg-mint/25 blur-[110px]" />
-      </div>
+    <div
+      className="relative min-h-screen flex items-center justify-center overflow-hidden px-4"
+      style={{
+        background: `
+          radial-gradient(ellipse 70% 55% at 12% 12%, rgba(23,120,95,0.55), transparent 60%),
+          radial-gradient(ellipse 65% 60% at 88% 88%, rgba(130,20,60,0.55), transparent 62%),
+          radial-gradient(ellipse 60% 55% at 55% 45%, rgba(70,50,110,0.35), transparent 65%),
+          #08080f
+        `,
+      }}
+    >
 
       <div className="relative w-full max-w-sm">
         <div className="rounded-3xl border border-white/10 bg-white/10 backdrop-blur-2xl shadow-2xl shadow-black/40">
