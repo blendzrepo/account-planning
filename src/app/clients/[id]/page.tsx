@@ -1,6 +1,7 @@
 import { getClientDetail } from "@/lib/queries";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { buttonClasses } from "@/components/ui/button-styles";
 
 import SituacaoSection from "@/components/sections/SituacaoSection";
 import StakeholdersSection from "@/components/sections/StakeholdersSection";
@@ -26,7 +27,7 @@ export default async function ClientPage({ params }: { params: Promise<{ id: str
             Account Business Plan{client.tag ? ` · ${client.tag}` : ""}
           </p>
         </div>
-        <Link href={`/clients/${client.id}/settings`} className="text-sm text-gray-400 hover:text-navy hover:underline">
+        <Link href={`/clients/${client.id}/settings`} className={buttonClasses("primary", "sm")}>
           gerenciar cliente
         </Link>
       </div>
