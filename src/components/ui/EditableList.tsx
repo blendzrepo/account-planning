@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { buttonClasses } from "./button-styles";
 
 type Item = { id: string; texto: string };
 
@@ -57,10 +58,10 @@ export default function EditableList({ items, onAdd, onUpdate, onDelete, placeho
                 onChange={(e) => setDraft(e.target.value)}
               />
               <div className="flex flex-col gap-1">
-                <button onClick={save} className="text-xs font-medium text-white bg-navy px-2 py-1 rounded">
+                <button onClick={save} className={buttonClasses("primary", "sm")}>
                   Salvar
                 </button>
-                <button onClick={() => setEditingId(null)} className="text-xs text-gray-500">
+                <button onClick={() => setEditingId(null)} className={buttonClasses("secondary", "sm")}>
                   Cancelar
                 </button>
               </div>
@@ -76,11 +77,11 @@ export default function EditableList({ items, onAdd, onUpdate, onDelete, placeho
                     setDraft(item.texto);
                     setAdding(false);
                   }}
-                  className="text-xs text-navy underline decoration-dotted"
+                  className={buttonClasses("ghost", "sm")}
                 >
                   editar
                 </button>
-                <button onClick={() => remove(item.id)} disabled={pending} className="text-xs text-red-500 underline decoration-dotted">
+                <button onClick={() => remove(item.id)} disabled={pending} className={buttonClasses("dangerGhost", "sm")}>
                   remover
                 </button>
               </span>
@@ -101,7 +102,7 @@ export default function EditableList({ items, onAdd, onUpdate, onDelete, placeho
             onChange={(e) => setDraft(e.target.value)}
           />
           <div className="flex flex-col gap-1">
-            <button onClick={save} className="text-xs font-medium text-white bg-navy px-2 py-1 rounded">
+            <button onClick={save} className={buttonClasses("primary", "sm")}>
               Salvar
             </button>
             <button
@@ -109,7 +110,7 @@ export default function EditableList({ items, onAdd, onUpdate, onDelete, placeho
                 setAdding(false);
                 setDraft("");
               }}
-              className="text-xs text-gray-500"
+              className={buttonClasses("secondary", "sm")}
             >
               Cancelar
             </button>
@@ -122,7 +123,7 @@ export default function EditableList({ items, onAdd, onUpdate, onDelete, placeho
             setEditingId(null);
             setDraft("");
           }}
-          className="text-xs text-navy hover:underline"
+          className={buttonClasses("dashed", "sm")}
         >
           + adicionar item
         </button>

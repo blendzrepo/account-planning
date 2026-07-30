@@ -37,15 +37,19 @@ export default function ClientSwitcher({
           </option>
         ))}
       </select>
-      <div className="flex gap-3 mt-2 text-xs">
-        <Link href="/clients/new" className="text-accent hover:underline" onClick={onNavigate}>
+      <div className="flex gap-2 mt-2">
+        <Link
+          href="/clients/new"
+          onClick={onNavigate}
+          className="rounded-md border border-white/15 px-2.5 py-1 text-xs font-semibold text-accent hover:bg-white/10"
+        >
           + novo cliente
         </Link>
         {currentId && (
           <Link
             href={`/clients/${currentId}/settings`}
-            className="text-white/50 hover:underline"
             onClick={onNavigate}
+            className="rounded-md border border-white/15 px-2.5 py-1 text-xs font-semibold text-white/70 hover:bg-white/10"
           >
             gerenciar
           </Link>

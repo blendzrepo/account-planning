@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { buttonClasses } from "./button-styles";
 
 type Props = {
   value: string;
@@ -59,7 +60,7 @@ export default function EditableField({
                 setEditing(false);
               })
             }
-            className="text-xs font-medium text-white bg-navy px-2 py-1 rounded"
+            className={buttonClasses("primary", "sm")}
           >
             Salvar
           </button>
@@ -68,7 +69,7 @@ export default function EditableField({
               setDraft(value);
               setEditing(false);
             }}
-            className="text-xs text-gray-500"
+            className={buttonClasses("secondary", "sm")}
           >
             Cancelar
           </button>

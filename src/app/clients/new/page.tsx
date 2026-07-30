@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/actions/clients";
+import { buttonClasses } from "@/components/ui/button-styles";
 
 export default function NewClientPage() {
   return (
@@ -38,7 +39,7 @@ function ClientForm() {
           className="w-full rounded-md border border-card-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-navy/30"
         />
       </div>
-      <button type="submit" className="rounded-md bg-navy text-white px-4 py-2 text-sm font-semibold hover:opacity-90">
+      <button type="submit" className={buttonClasses("primary", "md")}>
         Criar cliente
       </button>
     </form>

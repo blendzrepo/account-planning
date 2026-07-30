@@ -72,12 +72,19 @@ export default function AppSidebar({
         <div className="mt-4 pt-4 border-t border-white/10 text-xs">
           <div className="text-white/40 mb-1.5">Logado como</div>
           <div className="font-semibold mb-3">{username}</div>
-          <div className="flex gap-3">
-            <Link href="/clients/account" className="text-accent hover:underline" onClick={close}>
+          <div className="flex gap-2">
+            <Link
+              href="/clients/account"
+              onClick={close}
+              className="rounded-md border border-white/15 px-2.5 py-1 text-xs font-semibold text-accent hover:bg-white/10"
+            >
               trocar senha
             </Link>
             <form action={logout}>
-              <button type="submit" className="text-white/50 hover:underline">
+              <button
+                type="submit"
+                className="rounded-md border border-white/15 px-2.5 py-1 text-xs font-semibold text-white/70 hover:bg-white/10"
+              >
                 sair
               </button>
             </form>

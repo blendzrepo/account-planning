@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { renameClient, deleteClient } from "@/lib/actions/clients";
 import ConfirmForm from "@/components/ui/ConfirmForm";
+import { buttonClasses } from "@/components/ui/button-styles";
 import Link from "next/link";
 
 export default async function ClientSettingsPage({ params }: { params: Promise<{ id: string }> }) {
@@ -48,7 +49,7 @@ export default async function ClientSettingsPage({ params }: { params: Promise<{
             className="w-full rounded-md border border-card-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-navy/30"
           />
         </div>
-        <button type="submit" className="rounded-md bg-navy text-white px-4 py-2 text-sm font-semibold hover:opacity-90">
+        <button type="submit" className={buttonClasses("primary", "md")}>
           Salvar alterações
         </button>
       </form>
@@ -59,10 +60,7 @@ export default async function ClientSettingsPage({ params }: { params: Promise<{
           Remove permanentemente este cliente e todo o conteúdo do plano (stakeholders, riscos, oportunidades etc.).
         </p>
         <ConfirmForm action={submitDelete} message={`Remover "${client.name}" e todo o seu plano? Essa ação não pode ser desfeita.`}>
-          <button
-            type="submit"
-            className="rounded-md border border-red-300 text-red-600 px-4 py-2 text-sm font-semibold hover:bg-red-50"
-          >
+          <button type="submit" className={buttonClasses("danger", "md")}>
             Remover cliente
           </button>
         </ConfirmForm>

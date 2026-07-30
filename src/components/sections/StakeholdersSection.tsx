@@ -2,30 +2,20 @@ import type { ClientDetail } from "@/lib/queries";
 import { addStakeholder, updateStakeholder, deleteStakeholder } from "@/lib/actions/stakeholders";
 import { PapelStakeholder, NivelPoder } from "@/generated/prisma/enums";
 import SectionShell from "@/components/ui/SectionShell";
-import EditableTable, { type Column } from "@/components/ui/EditableTable";
+import StakeholderCards, { type BadgeOption } from "@/components/ui/StakeholderCards";
 
-const PAPEL_OPTIONS = [
-  { value: PapelStakeholder.DECISOR, label: "Decisor" },
-  { value: PapelStakeholder.INFLUENCIADOR, label: "Influenciador" },
-  { value: PapelStakeholder.COMPRAS, label: "Compras" },
-  { value: PapelStakeholder.PATROCINADOR, label: "Patrocinador" },
-  { value: PapelStakeholder.USUARIO, label: "Usuário" },
+const PAPEL_OPTIONS: BadgeOption[] = [
+  { value: PapelStakeholder.DECISOR, label: "Decisor", badgeClass: "bg-navy text-white" },
+  { value: PapelStakeholder.INFLUENCIADOR, label: "Influenciador", badgeClass: "bg-teal text-white" },
+  { value: PapelStakeholder.COMPRAS, label: "Compras", badgeClass: "bg-accent text-white" },
+  { value: PapelStakeholder.PATROCINADOR, label: "Patrocinador", badgeClass: "bg-indigo-500 text-white" },
+  { value: PapelStakeholder.USUARIO, label: "Usuário", badgeClass: "bg-gray-400 text-white" },
 ];
 
-const PODER_OPTIONS = [
-  { value: NivelPoder.ALTO, label: "Alto" },
-  { value: NivelPoder.MEDIO, label: "Médio" },
-  { value: NivelPoder.BAIXO, label: "Baixo" },
-];
-
-const COLUMNS: Column[] = [
-  { key: "nome", label: "Nome", type: "text" },
-  { key: "cargo", label: "Cargo / área", type: "text" },
-  { key: "papel", label: "Papel", type: "select", options: PAPEL_OPTIONS },
-  { key: "poder", label: "Poder", type: "select", options: PODER_OPTIONS },
-  { key: "agenda", label: "Agenda / prioridades", type: "textarea" },
-  { key: "estrategia", label: "Estratégia de relacionamento", type: "textarea" },
-  { key: "linkedinHighlight", label: "Destaque (LinkedIn)", type: "textarea" },
+const PODER_OPTIONS: BadgeOption[] = [
+  { value: NivelPoder.ALTO, label: "Alto", badgeClass: "bg-red-100 text-red-700" },
+  { value: NivelPoder.MEDIO, label: "Médio", badgeClass: "bg-amber-100 text-amber-700" },
+  { value: NivelPoder.BAIXO, label: "Baixo", badgeClass: "bg-gray-100 text-gray-600" },
 ];
 
 export default function StakeholdersSection({ client }: { client: ClientDetail }) {
@@ -67,13 +57,13 @@ export default function StakeholdersSection({ client }: { client: ClientDetail }
       title="Mapa de stakeholders"
       subtitle="Papel, poder, agenda e estratégia de relacionamento por contato."
     >
-      <EditableTable
-        columns={COLUMNS}
+      <StakeholderCards
         rows={client.stakeholders}
+        papelOptions={PAPEL_OPTIONS}
+        poderOptions={PODER_OPTIONS}
         onAdd={handleAdd}
         onUpdate={handleUpdate}
         onDelete={handleDelete}
-        emptyLabel="Nenhum stakeholder cadastrado ainda."
       />
     </SectionShell>
   );

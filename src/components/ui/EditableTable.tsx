@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { buttonClasses } from "./button-styles";
 
 export type ColumnType = "text" | "textarea" | "number" | "select";
 
@@ -116,26 +117,22 @@ export default function EditableTable<T extends Row>({
                 <td className="px-4 py-3 align-top">
                   {editingId === row.id ? (
                     <div className="flex gap-2">
-                      <button
-                        onClick={save}
-                        disabled={pending}
-                        className="text-xs font-medium text-white bg-navy px-2 py-1 rounded hover:opacity-90"
-                      >
+                      <button onClick={save} disabled={pending} className={buttonClasses("primary", "sm")}>
                         Salvar
                       </button>
-                      <button onClick={cancel} className="text-xs text-gray-500 hover:underline">
+                      <button onClick={cancel} className={buttonClasses("secondary", "sm")}>
                         Cancelar
                       </button>
                     </div>
                   ) : (
-                    <div className="flex gap-3">
-                      <button onClick={() => startEdit(row)} className="text-xs text-navy underline decoration-dotted">
+                    <div className="flex gap-2">
+                      <button onClick={() => startEdit(row)} className={buttonClasses("ghost", "sm")}>
                         editar
                       </button>
                       <button
                         onClick={() => remove(row.id)}
                         disabled={pending}
-                        className="text-xs text-red-500 underline decoration-dotted"
+                        className={buttonClasses("dangerGhost", "sm")}
                       >
                         remover
                       </button>
@@ -149,14 +146,10 @@ export default function EditableTable<T extends Row>({
                 <RowInputs columns={columns} draft={draft} setDraft={setDraft} />
                 <td className="px-4 py-3 align-top">
                   <div className="flex gap-2">
-                    <button
-                      onClick={save}
-                      disabled={pending}
-                      className="text-xs font-medium text-white bg-navy px-2 py-1 rounded hover:opacity-90"
-                    >
+                    <button onClick={save} disabled={pending} className={buttonClasses("primary", "sm")}>
                       Salvar
                     </button>
-                    <button onClick={cancel} className="text-xs text-gray-500 hover:underline">
+                    <button onClick={cancel} className={buttonClasses("secondary", "sm")}>
                       Cancelar
                     </button>
                   </div>
@@ -169,7 +162,7 @@ export default function EditableTable<T extends Row>({
       {!adding && (
         <button
           onClick={startAdd}
-          className="w-full text-left px-4 py-2 text-sm text-navy hover:bg-card border-t border-card-border transition-colors"
+          className={buttonClasses("dashed", "sm", "w-full rounded-none border-x-0 border-b-0")}
         >
           + adicionar linha
         </button>

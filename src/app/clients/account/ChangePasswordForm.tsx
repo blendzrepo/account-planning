@@ -2,6 +2,7 @@
 
 import { useActionState, useRef, useEffect } from "react";
 import { changePassword, type ChangePasswordState } from "@/lib/actions/account";
+import { buttonClasses } from "@/components/ui/button-styles";
 
 export default function ChangePasswordForm() {
   const [state, formAction, pending] = useActionState<ChangePasswordState, FormData>(
@@ -52,11 +53,7 @@ export default function ChangePasswordForm() {
       </div>
       {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
       {state?.success && <p className="text-sm text-green-600">Senha alterada com sucesso.</p>}
-      <button
-        type="submit"
-        disabled={pending}
-        className="rounded-md bg-navy text-white px-4 py-2 text-sm font-semibold hover:opacity-90 disabled:opacity-60"
-      >
+      <button type="submit" disabled={pending} className={buttonClasses("primary", "md")}>
         {pending ? "Salvando..." : "Salvar nova senha"}
       </button>
     </form>
