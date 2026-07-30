@@ -12,7 +12,7 @@ function FieldIcon({ d }: { d: string }) {
       fill="none"
       stroke="currentColor"
       strokeWidth="1.8"
-      className="text-white/40 shrink-0"
+      className="text-gray-400 shrink-0"
       aria-hidden="true"
     >
       <path strokeLinecap="round" strokeLinejoin="round" d={d} />
@@ -21,9 +21,9 @@ function FieldIcon({ d }: { d: string }) {
 }
 
 const inputWrap =
-  "flex items-center gap-3 border-b border-white/15 pb-2 transition-colors focus-within:border-mint/70";
+  "flex items-center gap-3 border-b border-card-border pb-2 transition-colors focus-within:border-accent";
 const inputClass =
-  "w-full bg-transparent text-white placeholder-white/40 text-sm focus:outline-none";
+  "w-full bg-transparent text-navy placeholder-gray-400 text-sm focus:outline-none";
 
 export default function LoginForm() {
   const [state, formAction, pending] = useActionState<LoginState, FormData>(login, undefined);
@@ -68,7 +68,7 @@ export default function LoginForm() {
         />
       </div>
 
-      {state?.error && <p className="text-sm text-red-300">{state.error}</p>}
+      {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
 
       <button
         type="submit"
