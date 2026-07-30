@@ -16,7 +16,7 @@ export default function LoginForm() {
           required
           autoFocus
           autoCapitalize="none"
-          placeholder="ex: primecontrol"
+          placeholder="sua organização"
           className="w-full rounded-md border border-card-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-navy/30"
         />
       </div>
